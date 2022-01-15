@@ -13,3 +13,6 @@ HTTP_request_chip = '/chip_status'
 #   Conversation API
 HTTP_request_conversation = '/conversations'
 HTTP_request_conversation_info = '/conversation_info'
+
+#Customer contact info
+contact_info = 'customer_service@help.br'
