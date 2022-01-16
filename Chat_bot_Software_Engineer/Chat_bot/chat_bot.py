@@ -55,15 +55,16 @@ def check_all_messages(message):
 
 def get_response(user_input):
 
-    split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
-    response = check_all_messages(split_message)
-    #message_remove_punctuantion = user_input.translate(str.maketrans("","", string.punctuation))
-    #list_of_words_to_analyze = message_remove_punctuantion.split()
+    #split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
+    #response = check_all_messages(split_message)
+    message_remove_punctuantion = user_input.translate(str.maketrans("","", string.punctuation))
+    list_of_words_to_analyze = message_remove_punctuantion.split()
 
-    #response = check_all_messages(list_of_words_to_analyze)
+    response = check_all_messages(list_of_words_to_analyze)
     return response
 
 
 #test response system
+#while message on the conversation then delete the act conversation and go to the next one
 while True:
     print('Bot: ' + get_response(input('You: ')))

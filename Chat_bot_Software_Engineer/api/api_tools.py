@@ -28,7 +28,7 @@ def generate_chip_info(params_request):
     return response_chip.json()
 
 #----Function Active Conversations info----
-def generate_act_conv_info():
+def generate_all_act_conv_info():
     response_conversation = requests.post(conversations_api+HTTP_request_conversation, headers=header)
     json_response_conversation = response_conversation.json() #retrieve active conversations ID
 
@@ -40,3 +40,24 @@ def generate_act_conv_info():
             active_chat_list.append(response_conversation.json())
 
         return active_chat_list
+
+#----Function List Active Chats----
+def generate_act_convs():
+    url = conversations_api+HTTP_request_conversation
+    response_conversation = requests.post(url, headers=header)
+    json_response_conversation = response_conversation.json() #retrieve active conversations ID
+
+    active_chats = json_response_conversation.get('conversation_ids')
+
+    return active_chats
+
+#----Function one conversation info----
+
+def generate_act_conv_info(conversation_id):
+
+    url = conversations_api+HTTP_request_conversation_info
+    params = {"conversation_id": conversation_id}
+    response_conversation = requests.post(url, json=params, headers=header)
+    conversation_info = response_conversation.json()
+
+    return conversation_info
