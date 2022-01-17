@@ -35,11 +35,15 @@ def check_all_messages(message):
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
 
 #-----------------------------------Responses--------------------------------
+    #Basic responses
     response('Greetings!', ['hello','hi','hola', 'oi', 'greetings','hey'], single_response=True) #first answer to the message
     response("I'm doing fine, and you?", ['how', 'are', 'you', 'doing'], required_words=['how'])
 
-    #long responses
+    #Long responses
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
+
+    #Coded responses delivery reponse missing merchant id
+    #response(long.delivery_response(), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
 
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
