@@ -43,9 +43,12 @@ def check_all_messages(message):
     #Long responses
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
 
-    #Coded responses delivery reponse missing merchant id
-    #response(long.delivery_response(), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
+    #--Coded responses delivery reponse missing merchant id--
 
+    #response(long.delivery_response(), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
+    response('oh a Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
+    response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
+    response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
