@@ -1,8 +1,6 @@
 from Chat_bot_Software_Engineer.api.api_tools import *
 
 #TBU when the bot can treat severall requests simoultaneously
-active_chats_list = generate_act_conv_info()
-number_of_active_chats = len(active_chats_list)
 
 def responses_pipeline():
     active_chats = generate_act_convs_list()
