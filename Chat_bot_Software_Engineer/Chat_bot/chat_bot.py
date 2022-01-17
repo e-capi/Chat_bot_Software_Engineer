@@ -1,4 +1,5 @@
 import re
+#from Chat_bot.chat_tools import responses_pipeline
 import long_responses as long
 import string
 
@@ -70,5 +71,11 @@ def get_response(user_input):
 
 #test response system
 #while message on the conversation then delete the act conversation and go to the next one
+
+#subjects_list = responses_pipeline()
+
+#for subject in subjects_list: #for api response with conv_id + response(subject)
+    #get_response(subject)
+
 while True:
     print('Bot: ' + get_response(input('You: ')))

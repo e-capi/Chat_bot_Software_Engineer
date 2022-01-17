@@ -1,6 +1,5 @@
 import requests
-from api.settings import *
-
+from Chat_bot_Software_Engineer.api.settings import *
 
 #----Functions sales_id: Tracking & Zip_code----
 #Tracking Function
@@ -98,3 +97,36 @@ def generate_act_conv_info(conversation_id):
     conversation_info = response_conversation.json()
 
     return conversation_info
+
+# for pipeline response
+def generate_info_of_conv(conversation_id, info_needed):
+
+    conversation_id = str(conversation_id)
+    info_needed = str(info_needed)
+
+    url = conversations_api+HTTP_request_conversation_info
+    params = {"conversation_id": conversation_id}
+    response = requests.post(url, json=params, headers=header)
+    json_response = response.json()
+
+    info = json_response.get(info_needed)
+
+    return info
+
+#Check the status for delivery responses
+def delivery_api_status(param, code):
+
+    code = str(code)
+    param = str(param)
+
+    if code == 'zip_code':
+        response = generate_sale_zip_info({code: param})
+    elif code == 'id_sale':
+        response = generate_sale_tracking_info({code: param})
+
+    if isinstance(response,dict):
+
+        return 'ok'
+
+    else:
+        return 'error'

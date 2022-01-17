@@ -1,6 +1,5 @@
-
-from Chat_bot_Software_Engineer.api.api_status import *
 import random
+
 from Chat_bot_Software_Engineer.SQL.SQL_tools import *
 from Chat_bot_Software_Engineer.api.api_tools import *
 from Chat_bot_Software_Engineer.api.settings import contact_info
@@ -10,7 +9,6 @@ customer_service = f"I'm affraid im not as smart as I though but surely one of o
 
 #Delivery Response
 def delivery_response(merchant_id):
-    contact_info = 'customer_service@help.br'
     #TBD check that all api are [200] if not -> answer internar error
 
     #get id sale from SQL
