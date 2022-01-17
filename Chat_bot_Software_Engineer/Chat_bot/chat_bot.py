@@ -1,4 +1,5 @@
 import re
+from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline
 import long_responses as long
 import string
 
@@ -35,12 +36,19 @@ def check_all_messages(message):
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
 
 #-----------------------------------Responses--------------------------------
+    #Basic responses
     response('Greetings!', ['hello','hi','hola', 'oi', 'greetings','hey'], single_response=True) #first answer to the message
     response("I'm doing fine, and you?", ['how', 'are', 'you', 'doing'], required_words=['how'])
 
-    #long responses
+    #Long responses
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
 
+    #--Coded responses delivery reponse missing merchant id--
+
+    #response(long.delivery_response(), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
+    response('oh a Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
+    response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
+    response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -55,15 +63,22 @@ def check_all_messages(message):
 
 def get_response(user_input):
 
-    split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
-    response = check_all_messages(split_message)
-    #message_remove_punctuantion = user_input.translate(str.maketrans("","", string.punctuation))
-    #list_of_words_to_analyze = message_remove_punctuantion.split()
+    #split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
+    #response = check_all_messages(split_message)
+    message_remove_punctuantion = user_input.translate(str.maketrans("","", string.punctuation))
+    list_of_words_to_analyze = message_remove_punctuantion.split()
 
-    #response = check_all_messages(list_of_words_to_analyze)
+    response = check_all_messages(list_of_words_to_analyze)
     return response
 
 
 #test response system
+#while message on the conversation then delete the act conversation and go to the next one
+
+subjects_list = responses_pipeline()
+
+for subject in subjects_list: #for api response with conv_id + response(subject)
+    print(get_response(subject))
+
 while True:
     print('Bot: ' + get_response(input('You: ')))
