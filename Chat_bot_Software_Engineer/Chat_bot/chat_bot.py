@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline, responses_pipeline_v2
+from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline
 import long_responses as long
 import string
 
@@ -75,14 +75,14 @@ def get_response(user_input):
 #test response system
 #while message on the conversation then delete the act conversation and go to the next one
 
-list_of_all_active_messages = responses_pipeline_v2()
+list_of_all_active_messages = responses_pipeline()
 
 for message in list_of_all_active_messages: #for api response with conv_id + response(subject)
 
     merchant_id = message.get('merchant_id')
     subject = message.get('subject')
     conversation_id = message.get('conversation_id')
-    
+
     print(get_response(subject))
 
 while True:
