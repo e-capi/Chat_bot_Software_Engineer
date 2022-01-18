@@ -19,7 +19,7 @@ def delivery_response(merchant_id):
 
     if sale_api_status == 'error':
         return f'Oh, we got an internal issue please contact: {contact_info}'
-    #--------------------------------
+    #-------------------------------------------
 
 
     #get info from tracking API
@@ -34,13 +34,10 @@ def delivery_response(merchant_id):
 
     if zip_code_api_status == 'error':
         return f'Oh, we got an internal issue please contact: {contact_info}'
-    #--------------------------------
-
-
-
-
+    #-----------------------------------------------
 
     zip_code_info = generate_sale_zip_info({'zip_code':zip_code})
+    
     #variables
     delivery_forecast = tracking_info.get('delivery_forecast')
     order_status = tracking_info.get('status')
