@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline, responses_pipeline_v2
+from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline
 import long_responses as long
 import string
 
@@ -45,10 +45,12 @@ def check_all_messages(message):
 
     #--Coded responses delivery reponse missing merchant id--
 
-    response(long.delivery_response(merchant_id), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
-    response('oh a Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
+    response(long.delivery_response(merchant_id), ['delivery', 'forecast', 'late', 'check', 'address'], required_words=['delivery'])
+    response(long.receipt_response(merchant_id), ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
     response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
+
     #response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
+    #response('Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -58,7 +60,6 @@ def check_all_messages(message):
     #print(message)
 
     return long.unknown() if highest_prob_list[best_match] < 1 else best_match
-
 
 
 def get_response(user_input):
@@ -75,14 +76,17 @@ def get_response(user_input):
 #test response system
 #while message on the conversation then delete the act conversation and go to the next one
 
-list_of_all_active_messages = responses_pipeline_v2()
+list_of_all_active_messages = responses_pipeline()
 
-for message in list_of_all_active_messages: #for api response with conv_id + response(subject)
+
+for message in list_of_all_active_messages:
 
     merchant_id = message.get('merchant_id')
     subject = message.get('subject')
     conversation_id = message.get('conversation_id')
-    
+
+
+    #print(subject, merchant_id)
     print(get_response(subject))
 
 while True:
