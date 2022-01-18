@@ -24,7 +24,7 @@ def get_receipt_info_SQL(merchant_id):
     conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
     c = conn.cursor()
     query = """
-        SELECT status, description, value
+        SELECT status, description, value, created_at
         FROM receipt
         WHERE receipt.merchant_id = ?
     """
@@ -35,8 +35,11 @@ def get_receipt_info_SQL(merchant_id):
     status = receipt_info[0]
     description = receipt_info[1]
     value = receipt_info[2]
+    created_at = receipt_info[3]
 
-    answ_dict = {'status':status, 'description': description, 'value': value }
+    created_at = created_at.split()[0] #Select only the date
+
+    answ_dict = {'status':status, 'description': description, 'value': value, 'created_at': created_at }
     return answ_dict
 
 #GET chip status from merchant_id
@@ -62,14 +65,21 @@ def get_transactions_info_SQL(merchant_id):
     conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
     c = conn.cursor()
     query = """
-        SELECT transaction_id, created_at, value
+        SELECT transaction_id, value
         FROM transactions
         WHERE transactions.merchant_id = ?
     """
     c.execute(query, (merchant_id,))
     transactions_info = c.fetchall()
 
-    return transactions_info #returns a list of transaction_id, created_at, value
+    transactions_info_list = []
+    for transaction in transactions_info:
+
+        transaction = list(transaction)
+        transaction_dict = {'transaction_id': transaction[0], 'value': transaction[1]}
+        transactions_info_list.append(transaction_dict)
+
+    return transactions_info_list
 
 #GET aggregated transactions from merchant_id
 
