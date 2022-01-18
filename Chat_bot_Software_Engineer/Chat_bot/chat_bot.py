@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline
+from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline, responses_pipeline_v2
 import long_responses as long
 import string
 
@@ -45,10 +45,10 @@ def check_all_messages(message):
 
     #--Coded responses delivery reponse missing merchant id--
 
-    #response(long.delivery_response(), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
+    response(long.delivery_response(merchant_id), ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
     response('oh a Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
     response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
-    response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
+    #response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -75,9 +75,14 @@ def get_response(user_input):
 #test response system
 #while message on the conversation then delete the act conversation and go to the next one
 
-subjects_list = responses_pipeline()
+list_of_all_active_messages = responses_pipeline_v2()
 
-for subject in subjects_list: #for api response with conv_id + response(subject)
+for message in list_of_all_active_messages: #for api response with conv_id + response(subject)
+
+    merchant_id = message.get('merchant_id')
+    subject = message.get('subject')
+    conversation_id = message.get('conversation_id')
+    
     print(get_response(subject))
 
 while True:
