@@ -91,7 +91,7 @@ for message in list_of_all_active_messages:
     final_response = send_response(conversation_id, get_response(subject))
 
     #This function sends and email to our IT team if there's a problem when sending the final_response to the API
-    #function is comment due to the lack of a email to do this with. Yet its a functional function
+    #function is comment due to the lack of an email to do this with. Yet its a functional function
     #response_api_status(list_of_responses_info)
 
     print(final_response)

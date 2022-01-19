@@ -1,6 +1,9 @@
 from Chat_bot_Software_Engineer.api.api_tools import *
 import smtplib
 
+from dotenv import load_dotenv
+import os
+
 def responses_pipeline():
     active_chats = generate_act_convs_list()
     list_of_problems = []
@@ -42,15 +45,17 @@ def send_response(conversation_id, response_message):
 
 def email_support(email_content):
 
+    load_dotenv()
+
     sender_email = bot_email
     rec_email = support_email
-    password = 'bot_pass123'
+    bot_email_password = os.getenv('bot_email_password') #load bot email password
     message = email_content
 
     #Login to bot email
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(sender_email,password)
+    server.login(sender_email,bot_email_password)
 
     #send message
     server.sendmail(sender_email, rec_email, message)

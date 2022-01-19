@@ -100,4 +100,3 @@ def connection_response(merchant_id):
     description = chip_info.get('description')
 
     return f"Concerning your current issue:\nChip id: \033[1m{chip_id}\033[0m\nStatus: \033[1m{status}\033[0m\nDescription: \033[1m{description}\033[0m"
-    
