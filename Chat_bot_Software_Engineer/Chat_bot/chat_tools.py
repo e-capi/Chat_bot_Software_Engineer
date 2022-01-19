@@ -1,5 +1,8 @@
 from Chat_bot_Software_Engineer.api.api_tools import *
+import smtplib
 
+from dotenv import load_dotenv
+import os
 
 def responses_pipeline():
     active_chats = generate_act_convs_list()
@@ -24,3 +27,52 @@ def responses_pipeline():
 
         # {'conversation_id': chat_id, 'merchant_id':}
     return list_of_problems
+
+
+#send response to API
+
+def send_response(conversation_id, response_message):
+    send_email_to_IT_team_Airflow = 'Place Holder of function Send_response API unreachable'
+
+    try:
+        response_to_client = send_response_api(conversation_id, response_message)
+    except:
+        return send_email_to_IT_team_Airflow
+
+    return response_to_client
+
+#Functions for sending email to IT support team when responses can't be send through the send_response API
+
+def email_support(email_content):
+
+    load_dotenv()
+
+    sender_email = bot_email
+    rec_email = support_email
+    bot_email_password = os.getenv('bot_email_password') #load bot email password
+    message = email_content
+
+    #Login to bot email
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(sender_email,bot_email_password)
+
+    #send message
+    server.sendmail(sender_email, rec_email, message)
+    return f'Email has been sent to {rec_email}'
+
+
+def response_api_status(list_of_responses):
+    email_sent = []
+    for response_info in list_of_responses:
+        sent = response_info.get('sent')
+        description = response_info.get('description')
+
+        if sent != 'true' or description != 'OK':
+            email_support(email_content=response_info)
+            email_sent.append(response_info.get('conversation_id'))
+
+    if len(email_sent) < 1:
+        return "No errors encountered, no emails where sent"
+    else:
+        return f"emails where sent to {email_sent}"
