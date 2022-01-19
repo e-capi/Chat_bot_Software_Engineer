@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline, send_response
+from Chat_bot_Software_Engineer.Chat_bot.chat_tools import response_api_status, responses_pipeline, send_response
 import long_responses as long
 import string
 
@@ -79,6 +79,7 @@ def get_response(user_input):
 
 list_of_all_active_messages = responses_pipeline()
 
+#list_of_responses_info = [] when email function is implemented
 
 for message in list_of_all_active_messages:
 
@@ -86,9 +87,14 @@ for message in list_of_all_active_messages:
     subject = message.get('subject')
     conversation_id = message.get('conversation_id')
 
+    #final response sent to the API
+    final_response = send_response(conversation_id, get_response(subject))
 
-    #print(subject, merchant_id)
-    print(send_response(conversation_id, get_response(subject)))
+    #This function sends and email to our IT team if there's a problem when sending the final_response to the API
+    #function is comment due to the lack of a email to do this with. Yet its a functional function
+    #response_api_status(list_of_responses_info)
+
+    print(final_response)
 
 while True:
     print('Bot: ' + get_response(input('You: ')))

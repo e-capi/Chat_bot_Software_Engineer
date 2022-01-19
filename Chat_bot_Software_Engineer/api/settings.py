@@ -18,3 +18,8 @@ HTTP_send_conversation = '/send_message'
 
 #Customer contact info
 contact_info = 'customer_service@help.br'
+
+#e_mail generation info
+    #TB swaped for valable emails then uncomment the function on chat_bot.py
+bot_email= 'e-capi@email.com'
+support_email = 'IT_support@team.com'
