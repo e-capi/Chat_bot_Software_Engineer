@@ -24,3 +24,16 @@ def responses_pipeline():
 
         # {'conversation_id': chat_id, 'merchant_id':}
     return list_of_problems
+
+
+#TESTING send response to API
+
+def send_response(conversation_id, response_message):
+    send_email_to_IT_team_Airflow = 'Place Holder of function Send_response API unreachable'
+
+    try:
+        response_to_client = send_response_api(conversation_id, response_message)
+    except:
+        return send_email_to_IT_team_Airflow
+
+    return response_to_client

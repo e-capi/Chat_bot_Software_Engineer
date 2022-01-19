@@ -13,6 +13,8 @@ HTTP_request_chip = '/chip_status'
 #   Conversation API
 HTTP_request_conversation = '/conversations'
 HTTP_request_conversation_info = '/conversation_info'
+    #send response
+HTTP_send_conversation = '/send_message'
 
 #Customer contact info
 contact_info = 'customer_service@help.br'

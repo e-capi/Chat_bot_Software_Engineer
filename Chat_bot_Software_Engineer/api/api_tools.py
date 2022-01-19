@@ -113,6 +113,32 @@ def generate_info_of_conv(conversation_id, info_needed):
 
     return info
 
+#Send API_Response
+
+def send_response_api(conversation_id, message):
+
+    conversation_id = str(conversation_id)
+    message = str(message)
+
+    url = conversations_api+HTTP_send_conversation
+    params = {'conversation_id': conversation_id, 'message': message}
+
+    try:
+        response = requests.post(url,json=params, headers= header)
+        response.raise_for_status()
+
+    except requests.exceptions.HTTPError as errh:
+        return f"An Http Error occurred: Please, contact us at: {contact_info}"
+    except requests.exceptions.ConnectionError as errc:
+        return f"A Connection Error occurred: Please, try again later or contact us at: {contact_info}"
+    except requests.exceptions.Timeout as errt:
+        return f"A Timeout Error occurred: Please, try again later or contact us at: {contact_info}"
+    except requests.exceptions.RequestException as err:
+        return f"An Unknown Error occurred: Please, contact us at: {contact_info}"
+
+    return response.json()
+
+
 #Check the status for delivery responses
 def delivery_api_status(param, code):
 

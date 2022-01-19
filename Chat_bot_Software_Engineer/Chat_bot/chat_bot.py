@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline
+from Chat_bot_Software_Engineer.Chat_bot.chat_tools import responses_pipeline, send_response
 import long_responses as long
 import string
 
@@ -88,7 +88,7 @@ for message in list_of_all_active_messages:
 
 
     #print(subject, merchant_id)
-    print(get_response(subject))
+    print(send_response(conversation_id, get_response(subject)))
 
 while True:
     print('Bot: ' + get_response(input('You: ')))
