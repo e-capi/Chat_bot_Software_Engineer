@@ -47,8 +47,9 @@ def check_all_messages(message):
 
     response(long.delivery_response(merchant_id), ['delivery', 'forecast', 'late', 'check', 'address'], required_words=['delivery'])
     response(long.receipt_response(merchant_id), ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
-    response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
+    response(long.connection_response(merchant_id), ['connection', 'problem'], required_words=['connection'])
 
+    #response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
     #response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
     #response('Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
 

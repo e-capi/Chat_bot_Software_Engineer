@@ -54,7 +54,7 @@ def delivery_response(merchant_id):
         return f"Concerning your current issue\nYour machine it's expected to be deliver the \033[1m{delivery_forecast}\033[0m\nTo the following address:\n\033[1m{state}, {city}, {street}, {neighborhood}, {zip_code}\033[0m.\nStatus: \033[1m{order_status}\033[0m"
 
 
-#---------------------------receipt Response---------------------------
+#---------------------------Receipt Response---------------------------
 
 def receipt_response(merchant_id):
 
@@ -82,3 +82,22 @@ def unknown():
                 "Could you give me only key words that define your problem?"][random.randrange(3)]
 
     return response
+
+
+#---------------------------Connection Response---------------------------
+
+def connection_response(merchant_id):
+    #get SQL receipt info
+    try:
+        chip_id_SQL = get_chip_id_SQL(merchant_id)
+        chip_info = generate_chip_info(chip_id_SQL)
+    except:
+        return print('problem')
+
+    #variables
+    chip_id = chip_info.get('id')
+    status = chip_info.get('status')
+    description = chip_info.get('description')
+
+    return f"Concerning your current issue:\nChip id: \033[1m{chip_id}\033[0m\nStatus: \033[1m{status}\033[0m\nDescription: \033[1m{description}\033[0m"
+    
