@@ -1,7 +1,8 @@
 import re
 from Chat_bot_Software_Engineer.chat_bot.chat_tools import  responses_pipeline, send_response, response_api_status
-import long_responses as long
+from Chat_bot_Software_Engineer.chat_bot import long_responses as long
 import string
+
 
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):

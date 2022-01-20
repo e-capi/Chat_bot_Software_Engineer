@@ -11,7 +11,7 @@ black:
 	@black scripts/* Chat_bot_Software_Engineer/*.py
 
 test:
-	@coverage run -m pytest tests/*.py
+	@coverage run -m pytest tests/test_*.py
 	@coverage report -m --omit="${VIRTUAL_ENV}/lib/python*"
 
 ftest:

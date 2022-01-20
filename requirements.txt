@@ -32,3 +32,6 @@ termcolor
 python-dotenv
 smtplib
 
+#use: make test
+coverage
+pytest
