@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.Chat_bot.chat_tools import response_api_status, responses_pipeline, send_response
+from Chat_bot_Software_Engineer.chat_bot.chat_tools import response_api_status, responses_pipeline, send_response
 import long_responses as long
 import string
 
@@ -44,14 +44,10 @@ def check_all_messages(message):
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
 
     #--Coded responses delivery reponse missing merchant id--
-
     response(long.delivery_response(merchant_id), ['delivery', 'forecast', 'late', 'check', 'address'], required_words=['delivery'])
     response(long.receipt_response(merchant_id), ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
     response(long.connection_response(merchant_id), ['connection', 'problem'], required_words=['connection'])
 
-    #response("Connection problem that's a tricky one", ['connection', 'problem'], required_words=['connection'])
-    #response("Another delivery problem", ['delivery', 'forecast', 'late', 'check', 'address',], required_words=['delivery'])
-    #response('Receipt problem', ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -63,6 +59,7 @@ def check_all_messages(message):
     return long.unknown() if highest_prob_list[best_match] < 1 else best_match
 
 
+#Clean the user input and create a list of words
 def get_response(user_input):
 
     #split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
@@ -74,13 +71,15 @@ def get_response(user_input):
     return response
 
 
-#test response system
-#while message on the conversation then delete the act conversation and go to the next one
 
+#generate all the active conversations that need a response
 list_of_all_active_messages = responses_pipeline()
 
-#list_of_responses_info = [] when email function is implemented
 
+#list_of_responses_info = [] uncomment when a valid bot email and support email is added to the settings variables
+
+
+#For every single conversation answer all the user message, when finish go to next conversation
 for message in list_of_all_active_messages:
 
     merchant_id = message.get('merchant_id')
@@ -90,11 +89,14 @@ for message in list_of_all_active_messages:
     #final response sent to the API
     final_response = send_response(conversation_id, get_response(subject))
 
+    #---- TB uncommented along with list_of_responses_info
     #This function sends and email to our IT team if there's a problem when sending the final_response to the API
     #function is comment due to the lack of an email to do this with. Yet its a functional function
     #response_api_status(list_of_responses_info)
+    #----
 
     print(final_response)
 
+#Use to test normal bot answers such as: Hello, how are you ?
 while True:
     print('Bot: ' + get_response(input('You: ')))
