@@ -1,11 +1,11 @@
 import sqlite3
 
 #GET sale_if from merchant_id
+conn = sqlite3.connect('Chat_bot_Software_Engineer/data/simulation-db')
 
 def get_sale_id_SQL(merchant_id):
 
-    #/!\ SQL Hardcoded Implement Cloud SQL on GCP
-    conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
+    #Local SQL database (can be deploy in GCP)
     c = conn.cursor()
     query = """
         SELECT id_sale
@@ -20,8 +20,7 @@ def get_sale_id_SQL(merchant_id):
 
 def get_receipt_info_SQL(merchant_id):
 
-    #/!\ SQL Hardcoded Implement Cloud SQL on GCP
-    conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
+    #Local SQL database (can be deploy in GCP)
     c = conn.cursor()
     query = """
         SELECT status, description, value, created_at
@@ -45,8 +44,7 @@ def get_receipt_info_SQL(merchant_id):
 #GET chip status from merchant_id
 def get_chip_id_SQL(merchant_id):
 
-    #/!\ SQL Hardcoded Implement Cloud SQL on GCP
-    conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
+    #Local SQL database (can be deploy in GCP)
     c = conn.cursor()
     query = """
         SELECT chip_id
@@ -61,8 +59,7 @@ def get_chip_id_SQL(merchant_id):
 
 def get_transactions_info_SQL(merchant_id):
 
-    #/!\ SQL Hardcoded Implement Cloud SQL on GCP
-    conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
+    #Local SQL database (can be deploy in GCP)
     c = conn.cursor()
     query = """
         SELECT transaction_id, value
@@ -85,8 +82,7 @@ def get_transactions_info_SQL(merchant_id):
 
 def get_transactions_aggregate_SQL(merchant_id): #for now initialize to first act conv
 
-    #/!\ SQL Hardcoded Implement Cloud SQL on GCP
-    conn = sqlite3.connect('/home/ecapi/code/e-capi/Chat_bot_Software_Engineer/Chat_bot_Software_Engineer/data/simulation-db')
+    #Local SQL database (can be deploy in GCP)
     c = conn.cursor()
     query = """
         SELECT COUNT(transaction_id) as total_transactions, SUM(value) as total_value
