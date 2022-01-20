@@ -1,5 +1,5 @@
 import re
-from Chat_bot_Software_Engineer.chat_bot.chat_tools import response_api_status, responses_pipeline, send_response
+from Chat_bot_Software_Engineer.chat_bot.chat_tools import  responses_pipeline, send_response, response_api_status
 import long_responses as long
 import string
 
@@ -62,8 +62,11 @@ def check_all_messages(message):
 #Clean the user input and create a list of words
 def get_response(user_input):
 
+    #with regex:
     #split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
     #response = check_all_messages(split_message)
+
+    #without regex:
     message_remove_punctuantion = user_input.translate(str.maketrans("","", string.punctuation))
     list_of_words_to_analyze = message_remove_punctuantion.split()
 
