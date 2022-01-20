@@ -1,2 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+from Chat_bot_Software_Engineer.chat_bot.chat_tools import  responses_pipeline, send_response, response_api_status
+from Chat_bot_Software_Engineer.chat_bot.chat_bot import get_response
+
+
+list_of_all_active_messages = responses_pipeline()
+
+
+#list_of_responses_info = [] uncomment when a valid bot email and support email is added to the settings variables
+
+
+#For every single conversation answer all the user message, when finish go to next conversation
+for message in list_of_all_active_messages:
+
+    merchant_id = message.get('merchant_id')
+    subject = message.get('subject')
+    conversation_id = message.get('conversation_id')
+
+    #final response sent to the API
+    final_response = send_response(conversation_id, get_response(subject))
+
+    #---- TB uncommented along with list_of_responses_info
+    #This function sends and email to our IT team if there's a problem when sending the final_response to the API
+    #function is comment due to the lack of an email to do this with. Yet its a functional function
+    #response_api_status(list_of_responses_info)
+    #----
+
+    print(final_response)
