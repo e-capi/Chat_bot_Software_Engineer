@@ -55,7 +55,7 @@ Clone the project and install it:
 ```bash
 git clone git@github.com:e-capi/Chat_bot_Software_Engineer.git
 cd Chat_bot_Software_Engineer
-pip install -r requirements.txt
+pip install .
 make clean install test                # install and test
 ```
 Functionnal test with a script:
