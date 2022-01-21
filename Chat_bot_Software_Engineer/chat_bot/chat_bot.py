@@ -2,6 +2,7 @@ import re
 from Chat_bot_Software_Engineer.chat_bot.chat_tools import  responses_pipeline, send_response, response_api_status
 from Chat_bot_Software_Engineer.chat_bot import long_responses as long
 import string
+from datetime import datetime
 
 
 
@@ -37,9 +38,12 @@ def check_all_messages(message):
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
 
 #-----------------------------------Responses--------------------------------
-    #Basic responses
+#Basic responses
     response('Greetings!', ['hello','hi','hola', 'oi', 'greetings','hey'], single_response=True) #first answer to the message
     response("I'm doing fine, and you?", ['how', 'are', 'you', 'doing'], required_words=['how'])
+    response("Thanks to you, it was a pleasure serving you! :)", ['thanks', 'thank', 'you', 'obrigado', 'gracias'])
+    response("My name is e-capi and I'm a robot but don't tell anyone, please ^^", ['what', 'is', 'your', 'name'], required_words=['name'])
+    response(f"Well, technically speaking I was born in 1951 with the creation of AI which make me {datetime.now().year -1951} years old!", ['how', 'old', 'age', 'are', 'you', 'years'])
 
     #Long responses
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
