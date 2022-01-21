@@ -4,7 +4,6 @@
 from Chat_bot_Software_Engineer.chat_bot.chat_tools import  responses_pipeline, send_response, response_api_status
 from Chat_bot_Software_Engineer.chat_bot.chat_bot import get_response
 
-
 list_of_all_active_messages = responses_pipeline()
 
 
@@ -21,10 +20,12 @@ for message in list_of_all_active_messages:
     #final response sent to the API
     final_response = send_response(conversation_id, get_response(subject))
 
-    #---- TB uncommented along with list_of_responses_info
+    #-----------TB uncommented along with list_of_responses_info-----------
     #This function sends and email to our IT team if there's a problem when sending the final_response to the API
     #function is comment due to the lack of an email to do this with. Yet its a functional function
+
     #response_api_status(list_of_responses_info)
-    #----
+    
+    #-----------
 
     print(final_response)

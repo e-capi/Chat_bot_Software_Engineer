@@ -8,11 +8,14 @@ header = {'authorization': 'teste'} #auth code
 #   Sale API
 HTTP_request_sale_track = '/tracking'
 HTTP_request_sale_zip = '/zip_code'
+
 #   Chip Api
 HTTP_request_chip = '/chip_status'
+
 #   Conversation API
 HTTP_request_conversation = '/conversations'
 HTTP_request_conversation_info = '/conversation_info'
+
     #send response
 HTTP_send_conversation = '/send_message'
 

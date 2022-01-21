@@ -4,13 +4,10 @@ from Chat_bot_Software_Engineer.SQL.SQL_tools import *
 from Chat_bot_Software_Engineer.api.api_tools import *
 from Chat_bot_Software_Engineer.api.settings import contact_info
 
-#Long response
-customer_service = f"I'm affraid im not as smart as I though but surely one of our customer service employees is it.\nHere is their contact info {contact_info} they will be happy to support you. "
 
 #---------------------------Delivery Response---------------------------
 
 def delivery_response(merchant_id):
-    #TBD check that all api are [200] if not -> answer internar error
 
     #get id sale from SQL
     id_sale = get_sale_id_SQL(merchant_id)
@@ -75,15 +72,6 @@ def receipt_response(merchant_id):
     return f"\033[1mFirst of all we would like to remind you that transactions have a 24h delay before being transfered.\033[0m\nConcerning your demand here is some information:\nTransactions Date: \033[1m{date}\033[0m\nNumber of Transactions: \033[1m{total_transactions}\033[0m\nTransactions Total: \033[1mR${total_value}\033[0m\nStatus: \033[1m{status}\033[0m\nDescription: \033[1m{description}\033[0m\nTransactions Involved:\033[1m{transactions_info}\033[0m"
 
 
-
-def unknown():
-    response = ["I'm affraid I did not understand your message.\nCould you re-phrase that, please? ",
-                "Could you be more specific with your request?",
-                "Could you give me only key words that define your problem?"][random.randrange(3)]
-
-    return response
-
-
 #---------------------------Connection Response---------------------------
 
 def connection_response(merchant_id):
@@ -100,3 +88,17 @@ def connection_response(merchant_id):
     description = chip_info.get('description')
 
     return f"Concerning your current issue:\nChip id: \033[1m{chip_id}\033[0m\nStatus: \033[1m{status}\033[0m\nDescription: \033[1m{description}\033[0m"
+
+
+#---------------------------Unknown Response---------------------------
+
+def unknown():
+    response = ["I'm affraid I did not understand your message.\nCould you re-phrase that, please? ",
+                "Could you be more specific with your request?",
+                "Could you give me only key words that define your problem?"][random.randrange(3)]
+
+    return response
+
+
+#---------------------------Customer Service Response---------------------------
+customer_service = f"I'm affraid im not as smart as I though but surely one of our customer service employees is it.\nHere is their contact info {contact_info} they will be happy to support you. "

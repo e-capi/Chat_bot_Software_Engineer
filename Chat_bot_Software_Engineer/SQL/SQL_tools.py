@@ -1,7 +1,8 @@
 import sqlite3
 
-#GET sale_if from merchant_id
 conn = sqlite3.connect('Chat_bot_Software_Engineer/data/simulation-db')
+
+#-----------GET sale_if from merchant_id-----------
 
 def get_sale_id_SQL(merchant_id):
 
@@ -16,7 +17,8 @@ def get_sale_id_SQL(merchant_id):
     sale_id = c.fetchone()
     return {"id_sale": str(sale_id[0])} #gives a tupple, with a second null arg
 
-#GET receipt info from merchant_id
+
+#-----------GET receipt info from merchant_id-----------
 
 def get_receipt_info_SQL(merchant_id):
 
@@ -41,7 +43,9 @@ def get_receipt_info_SQL(merchant_id):
     answ_dict = {'status':status, 'description': description, 'value': value, 'created_at': created_at }
     return answ_dict
 
-#GET chip status from merchant_id
+
+#-----------GET chip status from merchant_id-----------
+
 def get_chip_id_SQL(merchant_id):
 
     #Local SQL database (can be deploy in GCP)
@@ -55,7 +59,8 @@ def get_chip_id_SQL(merchant_id):
     chip_id = c.fetchone()
     return {"chip_id": str(chip_id[0])} #gives a tupple, with a second null arg
 
-#GET transactions from merchant_id
+
+#-----------GET transactions from merchant_id-----------
 
 def get_transactions_info_SQL(merchant_id):
 
@@ -78,7 +83,8 @@ def get_transactions_info_SQL(merchant_id):
 
     return transactions_info_list
 
-#GET aggregated transactions from merchant_id
+
+#-----------GET aggregated transactions from merchant_id-----------
 
 def get_transactions_aggregate_SQL(merchant_id): #for now initialize to first act conv
 

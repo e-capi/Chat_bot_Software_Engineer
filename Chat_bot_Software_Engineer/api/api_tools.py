@@ -1,8 +1,8 @@
 import requests
 from Chat_bot_Software_Engineer.api.settings import *
 
-#----Functions sales_id: Tracking & Zip_code----
-#Tracking Function
+
+#-----------Tracking Function-----------
 
 def generate_sale_tracking_info(params_request):
     contact_info = 'customer_service@help.br'
@@ -22,7 +22,9 @@ def generate_sale_tracking_info(params_request):
         return f"An Unknown Error occurred: Please, contact us at: {contact_info}"
 
     return response.json()
-#Zip code Function
+
+
+#-----------Zip code Function-----------
 
 def generate_sale_zip_info(params_request):
     contact_info = 'customer_service@help.br'
@@ -44,7 +46,8 @@ def generate_sale_zip_info(params_request):
     return response.json()
 
 
-#----Function Chip Status-----
+#-----------Function Chip Status-----------
+
 def generate_chip_info(params_request):
     contact_info = 'customer_service@help.br'
     url = chip_api+HTTP_request_chip
@@ -64,7 +67,9 @@ def generate_chip_info(params_request):
 
     return response.json()
 
-#----Function all Active Conversations info----
+
+#-----------Function all Active Conversations info-----------
+
 def generate_all_act_conv_info():
     url = conversations_api+HTTP_request_conversation
     response = requests.post(url, headers=header)
@@ -79,7 +84,9 @@ def generate_all_act_conv_info():
 
         return active_chat_list
 
-#----Function all Active Chats List----
+
+#-----------Function all Active Chats List-----------
+
 def generate_act_convs_list():
     url = conversations_api+HTTP_request_conversation
     response = requests.post(url, headers=header)
@@ -88,7 +95,9 @@ def generate_act_convs_list():
     active_convs_list = json_response.get('conversation_ids')
     return active_convs_list
 
-#----Function one conversation info----
+
+#-----------Function one conversation info-----------
+
 def generate_act_conv_info(conversation_id):
 
     url = conversations_api+HTTP_request_conversation_info
@@ -98,7 +107,9 @@ def generate_act_conv_info(conversation_id):
 
     return conversation_info
 
-# for pipeline response
+
+#-----------for pipeline response-----------
+
 def generate_info_of_conv(conversation_id, info_needed):
 
     conversation_id = str(conversation_id)
@@ -113,7 +124,8 @@ def generate_info_of_conv(conversation_id, info_needed):
 
     return info
 
-#Send API_Response
+
+#-----------Send API_Response-----------
 
 def send_response_api(conversation_id, message):
 
@@ -139,7 +151,8 @@ def send_response_api(conversation_id, message):
     return response.json()
 
 
-#Check the status for delivery responses
+#-----------Check the status for delivery responses-----------
+
 def delivery_api_status(param, code):
 
     code = str(code)
