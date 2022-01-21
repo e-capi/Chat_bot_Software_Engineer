@@ -46,9 +46,9 @@ def delivery_response(merchant_id):
     complement = zip_code_info.get('complement')
 
     if complement is not None and isinstance(complement,str) and len(complement)>0: #do something when there is a complement
-        return f"Concerning your current issue\nYour machine it's expected to be deliver the \033[1m{delivery_forecast}\033[0m\nTo the following address:\n\033[1m{state}, {city}, {street}, {neighborhood}, {zip_code}\033[0m, \033[1m{complement}\033[0m.\nStatus: \033[1m{order_status}\033[0m"
+        return f"Concerning your current issue. Your machine it's expected to be deliver the {delivery_forecast}. To the following address: {state}, {city}, {street}, {neighborhood}, {zip_code}, {complement}. Status: {order_status}"
     else:
-        return f"Concerning your current issue\nYour machine it's expected to be deliver the \033[1m{delivery_forecast}\033[0m\nTo the following address:\n\033[1m{state}, {city}, {street}, {neighborhood}, {zip_code}\033[0m.\nStatus: \033[1m{order_status}\033[0m"
+        return f"Concerning your current issue. Your machine it's expected to be deliver the {delivery_forecast}. To the following address: {state}, {city}, {street}, {neighborhood}, {zip_code}. Status: {order_status}"
 
 
 #---------------------------Receipt Response---------------------------
@@ -69,7 +69,7 @@ def receipt_response(merchant_id):
     total_value = total_receipt_info.get('value')
     date = total_receipt_info.get('created_at')
 
-    return f"\033[1mFirst of all we would like to remind you that transactions have a 24h delay before being transfered.\033[0m\nConcerning your demand here is some information:\nTransactions Date: \033[1m{date}\033[0m\nNumber of Transactions: \033[1m{total_transactions}\033[0m\nTransactions Total: \033[1mR${total_value}\033[0m\nStatus: \033[1m{status}\033[0m\nDescription: \033[1m{description}\033[0m\nTransactions Involved:\033[1m{transactions_info}\033[0m"
+    return f"First of all we would like to remind you that transactions have a 24h delay before being transfered.Concerning your demand here is some information: Transactions Date: {date} Number of Transactions: {total_transactions}, Transactions Total: R${total_value}, Status: {status}, Description: {description}, Transactions Involved:{transactions_info}"
 
 
 #---------------------------Connection Response---------------------------
@@ -87,13 +87,13 @@ def connection_response(merchant_id):
     status = chip_info.get('status')
     description = chip_info.get('description')
 
-    return f"Concerning your current issue:\nChip id: \033[1m{chip_id}\033[0m\nStatus: \033[1m{status}\033[0m\nDescription: \033[1m{description}\033[0m"
+    return f"Concerning your current issue: Chip id: {chip_id}, Status: {status}, Description: {description}"
 
 
 #---------------------------Unknown Response---------------------------
 
 def unknown():
-    response = ["I'm affraid I did not understand your message.\nCould you re-phrase that, please? ",
+    response = ["I'm affraid I did not understand your message.Could you re-phrase that, please? ",
                 "Could you be more specific with your request?",
                 "Could you give me only key words that define your problem?"][random.randrange(3)]
 
@@ -101,4 +101,4 @@ def unknown():
 
 
 #---------------------------Customer Service Response---------------------------
-customer_service = f"I'm affraid im not as smart as I though but surely one of our customer service employees is it.\nHere is their contact info {contact_info} they will be happy to support you. "
+customer_service = f"I'm affraid im not as smart as I though but surely one of our customer service employees is it.Here is their contact info {contact_info} they will be happy to support you. "
