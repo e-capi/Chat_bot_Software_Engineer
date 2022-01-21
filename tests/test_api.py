@@ -12,6 +12,3 @@ def test_apis_connection():
         response = requests.get(api)
         assert response.raise_for_status() is None
 
-    #return print("Api's test passed!")
-
-#check_apis_connection() #need to remove it ?

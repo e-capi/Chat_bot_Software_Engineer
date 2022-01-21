@@ -2,7 +2,7 @@ import re
 from Chat_bot_Software_Engineer.chat_bot.chat_tools import  responses_pipeline, send_response, response_api_status
 from Chat_bot_Software_Engineer.chat_bot import long_responses as long
 import string
-
+from datetime import datetime
 
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
@@ -29,6 +29,7 @@ def message_probability(user_message, recognised_words, single_response=False, r
     else:
         return 0
 
+
 def check_all_messages(message):
     highest_prob_list = {}
 
@@ -36,27 +37,28 @@ def check_all_messages(message):
         nonlocal highest_prob_list
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
 
+
 #-----------------------------------Responses--------------------------------
-    #Basic responses
+
+#Basic responses
     response('Greetings!', ['hello','hi','hola', 'oi', 'greetings','hey'], single_response=True) #first answer to the message
     response("I'm doing fine, and you?", ['how', 'are', 'you', 'doing'], required_words=['how'])
+    response("Thanks to you, it was a pleasure serving you! :)", ['thanks', 'thank', 'you', 'obrigado', 'gracias'])
+    response("My name is e-capi and I'm a robot but don't tell anyone, please ^^", ['what', 'is', 'your', 'name'], required_words=['name'])
+    response(f"Well, technically speaking I was born in 1951 with the creation of AI which make me {datetime.now().year -1951} years old!", ['how', 'old', 'age', 'are', 'you', 'years'])
 
-    #Long responses
+#Long responses
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
 
-    #--Coded responses delivery reponse missing merchant id--
+#Coded responses
     response(long.delivery_response(merchant_id), ['delivery', 'forecast', 'late', 'check', 'address'], required_words=['delivery'])
     response(long.receipt_response(merchant_id), ['bank', 'account', 'receipt', 'problem'], required_words=['receipt'])
     response(long.connection_response(merchant_id), ['connection', 'problem'], required_words=['connection'])
 
-
+#find the best matching answer
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
-    #Debugging
-    #print(highest_prob_list)
-    #print(f'Best match = {best_match} | Score: {highest_prob_list[best_match]}')
-    #print(message)
-
+#answer with the best match or unknown() when the bot don't understand
     return long.unknown() if highest_prob_list[best_match] < 1 else best_match
 
 
@@ -75,10 +77,8 @@ def get_response(user_input):
     return response
 
 
-
 #generate all the active conversations that need a response
 list_of_all_active_messages = responses_pipeline()
-
 
 #list_of_responses_info = [] uncomment when a valid bot email and support email is added to the settings variables
 
@@ -101,6 +101,7 @@ for message in list_of_all_active_messages:
 
     print(final_response)
 
-#Use to test normal bot answers such as: Hello, how are you ?
+
+#Use to test normal bot answers such as: Hello, how are you, what's your age ?
 while True:
     print('Bot: ' + get_response(input('You: ')))
