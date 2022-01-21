@@ -45,7 +45,8 @@ def check_all_messages(message):
     response("I'm doing fine, and you?", ['how', 'are', 'you', 'doing'], required_words=['how'])
     response("Thanks to you, it was a pleasure serving you! :)", ['thanks', 'thank', 'you', 'obrigado', 'gracias'])
     response("My name is e-capi and I'm a robot but don't tell anyone, please ^^", ['what', 'is', 'your', 'name'], required_words=['name'])
-    response(f"Well, technically speaking I was born in 1951 with the creation of AI which make me {datetime.now().year -1951} years old!", ['how', 'old', 'age', 'are', 'you', 'years'])
+    response(f"Well, technically speaking I was born in 1951 with the creation of AI which makes me {datetime.now().year -1951} years old!", ['how', 'old', 'age', 'are', 'you', 'years'])
+    response("Sure I can! What can I help you with?", ['help', 'assistance', 'support'])
 
 #Long responses
     response(long.customer_service, ['customer', 'service', 'human', 'help', 'advice', 'contact', 'info'], required_words=[])
